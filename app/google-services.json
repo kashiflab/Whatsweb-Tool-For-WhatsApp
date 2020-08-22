@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "505806191917",
+    "firebase_url": "https://whatsweb-e80fc.firebaseio.com",
+    "project_id": "whatsweb-e80fc",
+    "storage_bucket": "whatsweb-e80fc.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:505806191917:android:b84b4469251608c7b967a4",
+        "android_client_info": {
+          "package_name": "com.limecoders.whatsweb"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "505806191917-s82rhibcc1osnpeauoadki2f3ra5g1kk.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDLYMXFt_0gYqO0yEFrcgK8em7EHg3kQjo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "505806191917-s82rhibcc1osnpeauoadki2f3ra5g1kk.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

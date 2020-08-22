@@ -1,0 +1,24 @@
+<resources>
+    <string name="app_name">Whatsweb</string>
+    <string name="action_settings">Settings</string>
+    <string name="title_activity_navigation_">Whatsapp Media Files</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="notification_disable_text">Do you want to disable your notifications?</string>
+    <string name="no_images">No Whatsapp image messages in your device</string>
+    <string name="no_videos">No Whatsapp video messages in your device</string>
+    <string name="no_audios">No Whatsapp audio messages in your device</string>
+    <string name="no_voices">No Whatsapp voice messages in your device</string>
+    <string name="loading">Loading</string>
+    <string name="uploading">Uploading</string>
+    <string name="file_cleaner">WhatsApp Cleaner</string>
+    <string name="privacy">Privacy Policy</string>
+    <string name="navigation_drawer_open">Open Navigation Drawer</string>
+    <string name="navigation_drawer_close">Close Navigation Drawer</string>
+    <string name="status_image">Status Image</string>
+<!--  IMG_16_9_APP_INSTALL#YOUR_PLACEMENT_ID  -->
+    <string name="BANNER_ID">2589049221359143_2589051374692261</string>
+<!--  IMG_16_9_APP_INSTALL#YOUR_PLACEMENT_ID  -->
+    <string name="INTERSTITIAL_ID">2589049221359143_2589049611359104</string>
+</resources>
