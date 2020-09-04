@@ -139,17 +139,10 @@ public class FirstActivity extends AppCompatActivity {
 
             @Override
             public void onInterstitialDismissed(Ad ad) {
-                if(filesbool){
-                    filesbool = false;
-                    startActivity(new Intent(FirstActivity.this,MainActivity.class));
-                }else if(web1bool){
+                if(web1bool){
                     startActivity(new Intent(FirstActivity.this,WebWhatsAppActivity.class));
                     web1bool=false;
-                }else if(isStatus){
-                    startActivity(new Intent(FirstActivity.this,StatusActivity.class));
-                    isStatus=false;
-                }
-                else  if(isSlideAdShown){
+                } else  if(isSlideAdShown){
                     isSlideAdShown = false;
                     startActivity(new Intent(FirstActivity.this,WebViewActivity.class).putExtra("url",adapter.getURLID()));
                 }
@@ -250,15 +243,7 @@ public class FirstActivity extends AppCompatActivity {
         statusSaverCD.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(interstitialAd.isAdLoaded()){
-                    interstitialAd.show();
-                    showpDialog();
-                    isStatus = true;
-                }else{
-                    isStatus = false;
-                    startActivity(new Intent(FirstActivity.this, StatusActivity.class));
-                }
-//                Toast.makeText(FirstActivity.this, "Working on it", Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(FirstActivity.this, StatusActivity.class));
             }
         });
 
@@ -299,16 +284,7 @@ public class FirstActivity extends AppCompatActivity {
         filesCD.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(interstitialAd.isAdLoaded()){
-                    // Show the ad
-                    interstitialAd.show();
-                    showpDialog();
-                    filesbool = true;
-                }else{
-                    filesbool = false;
-                    startActivity(new Intent(FirstActivity.this,MainActivity.class));
-                }
-
+                startActivity(new Intent(FirstActivity.this,MainActivity.class));
             }
         });
 
@@ -387,11 +363,27 @@ public class FirstActivity extends AppCompatActivity {
     }
 
     public boolean onOptionsItemSelected(MenuItem item) {
+
         if (item.getItemId() == R.id.privacy) {
             Uri uri = Uri.parse("https://whatscleaner.flycricket.io/privacy.html");
             Intent intent = new Intent(Intent.ACTION_VIEW, uri);
             startActivity(intent);
             return (true);
+        }else if(item.getItemId() == R.id.rateus){
+            Uri uri = Uri.parse("https://play.google.com/store/apps/details?id=com.limecoders.whatsweb&hl=en");
+            Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+            startActivity(intent);
+            return (true);
+        }else if(item.getItemId() == R.id.shareus){
+            Intent sharingIntent = new Intent(android.content.Intent.ACTION_SEND);
+            sharingIntent.setType("text/plain");
+            String shareBody = "Hey, check out this amazing WhatsTool app from Google Play Store." +
+                    "\nIt has 250+ games, WhatsApp Cleaner, Web WhatsApp and WhatsApp Status Saver."+
+                    "Here is the link: " +
+                    "https://play.google.com/store/apps/details?id=com.limecoders.whatsweb&hl=en.";
+            sharingIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, "WhatsTool for WhatsApp");
+            sharingIntent.putExtra(android.content.Intent.EXTRA_TEXT, shareBody);
+            startActivity(Intent.createChooser(sharingIntent, "Share via"));
         }
         return (super.onOptionsItemSelected(item));
     }

@@ -8,5 +8,15 @@
         android:title="@string/privacy"
         app:showAsAction="never" />
 
+    <item
+        android:id="@+id/shareus"
+        android:title="Share Us"
+        app:showAsAction="never"/>
+
+    <item
+        android:id="@+id/rateus"
+        android:title="Rate Us"
+        app:showAsAction="never"/>
+
 
 </menu>
