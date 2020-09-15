@@ -79,7 +79,7 @@ public class FirstActivity extends AppCompatActivity {
 
     private boolean filesbool=false, web1bool=false, isStatus =false;
 
-    private Button adminBtn;
+//    private Button adminBtn;
 
     @Override
     protected void onDestroy() {
@@ -223,7 +223,7 @@ public class FirstActivity extends AppCompatActivity {
 //        webwhatsappCD2 = findViewById(R.id.webwhatsappCD2);
         filesCD = findViewById(R.id.filesCD);
         imageView = findViewById(R.id.noInternetIV);
-        adminBtn = findViewById(R.id.admin);
+//        adminBtn = findViewById(R.id.admin);
 
         sliderView.setIndicatorAnimation(IndicatorAnimationType.WORM); //set indicator animation by using SliderLayout.IndicatorAnimations. :WORM or THIN_WORM or COLOR or DROP or FILL or NONE or SCALE or SCALE_DOWN or SLIDE and SWAP!!
         sliderView.setSliderTransformAnimation(SliderAnimations.SIMPLETRANSFORMATION);
@@ -244,12 +244,12 @@ public class FirstActivity extends AppCompatActivity {
             }
         });
 
-        adminBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(FirstActivity.this,AdminActivity.class));
-            }
-        });
+//        adminBtn.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                startActivity(new Intent(FirstActivity.this,AdminActivity.class));
+//            }
+//        });
 
         if(!Utils.isNetworkAvailable(FirstActivity.this)){
             sliderView.setVisibility(View.GONE);
@@ -367,7 +367,7 @@ public class FirstActivity extends AppCompatActivity {
             startActivity(intent);
             return (true);
         }else if(item.getItemId() == R.id.rateus){
-            Uri uri = Uri.parse("https://play.google.com/store/apps/details?id=com.limecoders.whatsweb&hl=en");
+            Uri uri = Uri.parse("https://play.google.com/store/apps/details?id=com.sftekapp.whatstool&hl=en");
             Intent intent = new Intent(Intent.ACTION_VIEW, uri);
             startActivity(intent);
             return (true);
@@ -377,7 +377,7 @@ public class FirstActivity extends AppCompatActivity {
             String shareBody = "Hey, check out this amazing WhatsTool app from Google Play Store." +
                     "\nIt has 250+ games, WhatsApp Cleaner, Web WhatsApp and WhatsApp Status Saver."+
                     "Here is the link: " +
-                    "https://play.google.com/store/apps/details?id=com.limecoders.whatsweb&hl=en.";
+                    "https://play.google.com/store/apps/details?id=com.softekapp.whatstool&hl=en.";
             sharingIntent.putExtra(android.content.Intent.EXTRA_SUBJECT, "WhatsTool for WhatsApp");
             sharingIntent.putExtra(android.content.Intent.EXTRA_TEXT, shareBody);
             startActivity(Intent.createChooser(sharingIntent, "Share via"));

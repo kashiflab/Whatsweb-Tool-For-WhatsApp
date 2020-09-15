@@ -59,7 +59,7 @@ public class AdminActivity extends AppCompatActivity {
         allBannerBtn = findViewById(R.id.allbanners);
 
         initpDialog();
-        storageReference = FirebaseStorage.getInstance().getReference("uploads");
+        storageReference = FirebaseStorage.getInstance().getReference().child("uploads");
 
         allBannerBtn.setOnClickListener(new View.OnClickListener() {
             @Override

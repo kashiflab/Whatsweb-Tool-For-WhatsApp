@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "48028283457",
+    "firebase_url": "https://whatstool-ec38e.firebaseio.com",
+    "project_id": "whatstool-ec38e",
+    "storage_bucket": "whatstool-ec38e.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:48028283457:android:a2cd22e69bc3065d2accc0",
+        "android_client_info": {
+          "package_name": "com.softekapp.whatstool"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "48028283457-eoql29cbr1r9ttvv29v7690iesdmjuk7.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCizoFYyfW0A-C1kMIwKyMP44MZeSsLd-w"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "48028283457-eoql29cbr1r9ttvv29v7690iesdmjuk7.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
