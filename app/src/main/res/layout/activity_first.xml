@@ -211,19 +211,19 @@
 <!--        </androidx.cardview.widget.CardView>-->
 
 
-<!--        <Button-->
-<!--            android:id="@+id/admin"-->
-<!--            android:text="Admin"-->
-<!--            android:textAllCaps="false"-->
-<!--            android:layout_margin="20dp"-->
-<!--            android:background="@color/lgreen"-->
-<!--            android:textStyle="bold"-->
-<!--            android:layout_alignParentBottom="true"-->
-<!--            android:layout_marginBottom="40dp"-->
-<!--            android:textSize="15sp"-->
-<!--            android:textColor="@color/white"-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="wrap_content"/>-->
+        <Button
+            android:id="@+id/admin"
+            android:text="Admin"
+            android:textAllCaps="false"
+            android:layout_margin="20dp"
+            android:background="@color/lgreen"
+            android:textStyle="bold"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="40dp"
+            android:textSize="15sp"
+            android:textColor="@color/white"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
 
     </LinearLayout>
     </ScrollView>

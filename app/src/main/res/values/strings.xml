@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Whatsweb</string>
+    <string name="app_name">WhatsTool</string>
     <string name="action_settings">Settings</string>
     <string name="title_activity_navigation_">Whatsapp Media Files</string>
 
@@ -18,7 +18,7 @@
     <string name="navigation_drawer_close">Close Navigation Drawer</string>
     <string name="status_image">Status Image</string>
 <!--  IMG_16_9_APP_INSTALL#YOUR_PLACEMENT_ID  -->
-    <string name="BANNER_ID">2589049221359143_2589051374692261</string>
+    <string name="BANNER_ID">IMG_16_9_APP_INSTALL#2803331693101162_2803337766433888</string>
 <!--  IMG_16_9_APP_INSTALL#YOUR_PLACEMENT_ID  -->
-    <string name="INTERSTITIAL_ID">2589049221359143_2589049611359104</string>
+    <string name="INTERSTITIAL_ID">IMG_16_9_APP_INSTALL#2803331693101162_2803336286434036</string>
 </resources>

@@ -4,7 +4,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:paddingTop="5dp"
-    tools:context="com.limecoders.whatsweb.Fragments.ImageFiles_Fragment">
+    tools:context="com.softekapp.whatstool.Fragments.ImageFiles_Fragment">
 
     <!-- TODO: Update blank fragment layout -->
     <androidx.recyclerview.widget.RecyclerView

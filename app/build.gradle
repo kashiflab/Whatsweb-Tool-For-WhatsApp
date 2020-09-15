@@ -4,7 +4,7 @@ android {
     compileSdkVersion 29
 
     defaultConfig {
-        applicationId "com.limecoders.whatsweb"
+        applicationId "com.softekapp.whatstool"
         minSdkVersion 21
         targetSdkVersion 29
         versionCode 2
