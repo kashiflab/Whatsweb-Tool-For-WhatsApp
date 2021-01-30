@@ -21,8 +21,6 @@ import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
-
-import com.facebook.ads.AdView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.softekapp.whatstool.Adapters.WAVideoAdapter;
 import com.softekapp.whatstool.GenericAdapter;
@@ -51,7 +49,6 @@ public class WAVideoFragment extends Fragment {
     RecyclerView recyclerView;
     FragmentActivity activity;
     ProgressBar progressBar;
-    private AdView mAdView;
     FloatingActionButton fab;
     WAVideoAdapter waVideoAdapter;
     ArrayList<WAImageModel> arrayList = new ArrayList<>();

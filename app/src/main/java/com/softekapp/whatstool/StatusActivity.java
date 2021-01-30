@@ -20,12 +20,6 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
-import com.facebook.ads.Ad;
-import com.facebook.ads.AdError;
-import com.facebook.ads.AdListener;
-import com.facebook.ads.AdSize;
-import com.facebook.ads.AdView;
-import com.facebook.ads.AudienceNetworkAds;
 import com.google.android.material.navigation.NavigationView;
 import com.softekapp.whatstool.Fragments.bwa.BWAFragment;
 import com.softekapp.whatstool.Fragments.wa.WAFragment;
@@ -37,55 +31,14 @@ public class StatusActivity extends AppCompatActivity
 
     @Override
     protected void onDestroy() {
-        if(adView!=null){
-            adView.destroy();
-        }
+
         super.onDestroy();
     }
-
-    private AdView adView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_status);
-
-        AudienceNetworkAds.initialize(this);
-
-        adView = new AdView(this, getString(R.string.BANNER_ID), AdSize.BANNER_HEIGHT_50);
-
-        // Find the Ad Container
-        LinearLayout adContainer = (LinearLayout) findViewById(R.id.banner_container);
-
-        // Add the ad view to your activity layout
-        adContainer.addView(adView);
-
-        // Request an ad
-        adView.loadAd();
-
-        adView.setAdListener(new AdListener() {
-            @Override
-            public void onError(Ad ad, AdError adError) {
-                Log.i("Error",adError.getErrorMessage());
-                ad.loadAd();
-            }
-
-            @Override
-            public void onAdLoaded(Ad ad) {
-                Log.i("Loaded","Loaded");
-            }
-
-            @Override
-            public void onAdClicked(Ad ad) {
-                Log.i("Clicked","Clicked");
-            }
-
-            @Override
-            public void onLoggingImpression(Ad ad) {
-                Log.i("Logging","Logging");
-            }
-        });
-
 
         try {
             if (!isMyServiceRunning(Class.forName("com.softekapp.statussaver.service.NotificationService"))) {

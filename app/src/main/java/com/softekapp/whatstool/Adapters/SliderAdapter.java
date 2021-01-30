@@ -82,14 +82,10 @@ public class SliderAdapter extends
 //                        context.startActivity(intent);
 
                         URLID = sliderItem.getUrl();
-                        if(FirstActivity.interstitialAd.isAdLoaded()){
-                            FirstActivity.interstitialAd.show();
-                            FirstActivity.isSlideAdShown = true;
-                            }
-                        else {
+
                             FirstActivity.isSlideAdShown = false;
                             context.startActivity(new Intent(context, WebViewActivity.class).putExtra("url",sliderItem.getUrl()));
-                        }
+
                     }
                 }
 //                Toast.makeText(context, "This is item in position " + position, Toast.LENGTH_SHORT).show();

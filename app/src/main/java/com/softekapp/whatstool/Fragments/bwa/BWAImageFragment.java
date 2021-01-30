@@ -22,7 +22,6 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
-import com.facebook.ads.AdView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.softekapp.whatstool.Adapters.WAImageAdapter;
 import com.softekapp.whatstool.GenericAdapter;
@@ -52,7 +51,6 @@ public class BWAImageFragment extends Fragment {
     FragmentActivity activity;
     ProgressBar progressBar;
     FloatingActionButton fab;
-    private AdView mAdView;
     WAImageAdapter waImageAdapter;
     ArrayList<WAImageModel> arrayList = new ArrayList<>();
     SwipeRefreshLayout swipeRefreshLayout;

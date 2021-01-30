@@ -24,14 +24,14 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 import androidx.core.content.ContextCompat;
 
-import com.facebook.ads.Ad;
-import com.facebook.ads.AdError;
-import com.facebook.ads.AdListener;
-import com.facebook.ads.AdSize;
-import com.facebook.ads.AdView;
-import com.facebook.ads.AudienceNetworkAds;
-import com.facebook.ads.InterstitialAd;
-import com.facebook.ads.InterstitialAdListener;
+import com.google.android.gms.ads.AdListener;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.InterstitialAd;
+import com.google.android.gms.ads.LoadAdError;
+import com.google.android.gms.ads.MobileAds;
+import com.google.android.gms.ads.initialization.InitializationStatus;
+import com.google.android.gms.ads.initialization.OnInitializationCompleteListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -75,7 +75,7 @@ public class FirstActivity extends AppCompatActivity {
 
     private static String TAG = "TAG";
 
-    public static InterstitialAd interstitialAd;
+    public static InterstitialAd mInterstitialAd;
 
     private boolean filesbool=false, web1bool=false, isStatus =false;
 
@@ -86,21 +86,13 @@ public class FirstActivity extends AppCompatActivity {
         if (adView != null) {
             adView.destroy();
         }
-        if (interstitialAd != null) {
-            interstitialAd.destroy();
-        }
         super.onDestroy();
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        if(pDialog.isShowing() & isShown){
-            hidepDialog();
-        }
-        if(!interstitialAd.isAdLoaded()){
-            interstitialAd.loadAd();
-        }
+
     }
 
     @Override
@@ -116,99 +108,66 @@ public class FirstActivity extends AppCompatActivity {
 
         RequestPermissions();
 
-        // Initialize the Audience Network SDK
-        AudienceNetworkAds.initialize(this);
+        MobileAds.initialize(this, new OnInitializationCompleteListener() {
+            @Override
+            public void onInitializationComplete(InitializationStatus initializationStatus) {
+            }
+        });
+        AdView mAdView = findViewById(R.id.adView);
+        AdRequest adRequest = new AdRequest.Builder().build();
+        mAdView.loadAd(adRequest);
 
         // Instantiate an InterstitialAd object.
         // NOTE: the placement ID will eventually identify this as your App, you can ignore it for
         // now, while you are testing and replace it later when you have signed up.
         // While you are using this temporary code you will only get test ads and if you release
         // your code like this to the Google Play your users will not receive ads (you will get a no fill error).
-        interstitialAd = new InterstitialAd(this, getString(R.string.INTERSTITIAL_ID));
+        mInterstitialAd = new InterstitialAd(this);
+        mInterstitialAd.setAdUnitId(getString(R.string.INTERSTITIAL_ID));
+        mInterstitialAd.loadAd(new AdRequest.Builder().build());
 
-        // Set listeners for the Interstitial Ad
-        interstitialAd.setAdListener(new InterstitialAdListener() {
+        mInterstitialAd.setAdListener(new AdListener() {
             @Override
-            public void onInterstitialDisplayed(Ad ad) {
-                // Interstitial ad displayed callback
-                Log.e(TAG, "Interstitial ad displayed.");
+            public void onAdLoaded() {
+                // Code to be executed when an ad finishes loading.
             }
 
             @Override
-            public void onInterstitialDismissed(Ad ad) {
+            public void onAdFailedToLoad(LoadAdError adError) {
+                // Code to be executed when an ad request fails.
+            }
+
+            @Override
+            public void onAdOpened() {
+                // Code to be executed when the ad is displayed.
+            }
+
+            @Override
+            public void onAdClicked() {
+                // Code to be executed when the user clicks on an ad.
+            }
+
+            @Override
+            public void onAdLeftApplication() {
+                // Code to be executed when the user has left the app.
+            }
+
+            @Override
+            public void onAdClosed() {
+
                 if(web1bool){
                     startActivity(new Intent(FirstActivity.this,WebWhatsAppActivity.class));
                     web1bool=false;
-                } else  if(isSlideAdShown){
-                    isSlideAdShown = false;
-                    startActivity(new Intent(FirstActivity.this,WebViewActivity.class).putExtra("url",adapter.getURLID()));
+                } else  if(isStatus){
+                    isStatus = false;
+                    startActivity(new Intent(FirstActivity.this,StatusActivity.class));
+                }else if(filesbool){
+                    filesbool = false;
+                    startActivity(new Intent(FirstActivity.this,MainActivity.class));
                 }
                 // Interstitial dismissed callback
                 Log.e(TAG, "Interstitial ad dismissed.");
-            }
-
-            @Override
-            public void onError(Ad ad, AdError adError) {
-                // Ad error callback
-                Log.e(TAG, "Interstitial ad failed to load: " + adError.getErrorMessage());
-//                interstitialAd.loadAd();
-            }
-
-            @Override
-            public void onAdLoaded(Ad ad) {
-                // Interstitial ad is loaded and ready to be displayed
-                Log.d(TAG, "Interstitial ad is loaded and ready to be displayed!");
-            }
-
-            @Override
-            public void onAdClicked(Ad ad) {
-                // Ad clicked callback
-                Log.d(TAG, "Interstitial ad clicked!");
-            }
-
-            @Override
-            public void onLoggingImpression(Ad ad) {
-                // Ad impression logged callback
-                Log.d(TAG, "Interstitial ad impression logged!");
-            }
-        });
-
-
-        // For auto play video ads, it's recommended to load the ad
-        // at least 30 seconds before it is shown
-        interstitialAd.loadAd();
-
-        adView = new AdView(this, getString(R.string.BANNER_ID), AdSize.BANNER_HEIGHT_50);
-
-        // Find the Ad Container
-        LinearLayout adContainer = (LinearLayout) findViewById(R.id.banner_container);
-
-        // Add the ad view to your activity layout
-        adContainer.addView(adView);
-
-        // Request an ad
-        adView.loadAd();
-
-        adView.setAdListener(new AdListener() {
-            @Override
-            public void onError(Ad ad, AdError adError) {
-                Log.i("Error",adError.getErrorMessage());
-                ad.loadAd();
-            }
-
-            @Override
-            public void onAdLoaded(Ad ad) {
-                Log.i("Loaded","Loaded");
-            }
-
-            @Override
-            public void onAdClicked(Ad ad) {
-                Log.i("Clicked","Clicked");
-            }
-
-            @Override
-            public void onLoggingImpression(Ad ad) {
-                Log.i("Logging","Logging");
+                // Code to be executed when the interstitial ad is closed.
             }
         });
 
@@ -240,7 +199,19 @@ public class FirstActivity extends AppCompatActivity {
         statusSaverCD.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(FirstActivity.this, StatusActivity.class));
+
+                if(mInterstitialAd.isLoaded()){
+                    // Show the ad
+                    mInterstitialAd.show();
+                    web1bool=false;
+                    filesbool = false;
+                    isStatus = true;
+                }else{
+                    filesbool = false;
+                    isStatus = false;
+                    web1bool = false;
+                    startActivity(new Intent(FirstActivity.this, StatusActivity.class));
+                }
             }
         });
 
@@ -265,12 +236,15 @@ public class FirstActivity extends AppCompatActivity {
         webWhatsappCD.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(interstitialAd.isAdLoaded()){
+                if(mInterstitialAd.isLoaded()){
                     // Show the ad
-                    interstitialAd.show();
-                    showpDialog();
+                    mInterstitialAd.show();
                     web1bool=true;
+                    filesbool = false;
+                    isStatus = false;
                 }else{
+                    filesbool = false;
+                    isStatus = false;
                     web1bool = false;
                     startActivity(new Intent(FirstActivity.this, WebWhatsAppActivity.class));
                 }
@@ -281,23 +255,21 @@ public class FirstActivity extends AppCompatActivity {
         filesCD.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(FirstActivity.this,MainActivity.class));
+                if(mInterstitialAd.isLoaded()){
+                    // Show the ad
+                    mInterstitialAd.show();
+                    web1bool=false;
+                    filesbool = true;
+                    isStatus = false;
+                }else{
+                    isStatus = false;
+                    filesbool = false;
+                    web1bool = false;
+                    startActivity(new Intent(FirstActivity.this,MainActivity.class));
+                }
             }
         });
 
-        Handler handler = new Handler();
-        handler.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                if(interstitialAd.isAdLoaded() & !isShown){
-                    interstitialAd.show();
-                    isShown = true;
-                }
-                hidepDialog();
-            }
-        },5000);
-
-        showAdWithDelay();
     }
 
     private void showAdWithDelay() {
@@ -307,12 +279,12 @@ public class FirstActivity extends AppCompatActivity {
                 Log.i("hello", "world");
                 runOnUiThread(new Runnable() {
                     public void run() {
-                        if (interstitialAd.isAdLoaded()) {
-                            interstitialAd.show();
+                        if (mInterstitialAd.isLoaded()) {
+                            mInterstitialAd.show();
                         } else {
                             Log.d("TAG", " Interstitial not loaded");
                         }
-                        interstitialAd.loadAd();
+                        mInterstitialAd.show();
                     }
                 });
             }

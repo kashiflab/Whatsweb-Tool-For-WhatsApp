@@ -29,11 +29,10 @@ import com.anychart.AnyChartView;
 import com.anychart.chart.common.dataentry.DataEntry;
 import com.anychart.chart.common.dataentry.ValueDataEntry;
 import com.anychart.charts.Pie;
-import com.facebook.ads.Ad;
-import com.facebook.ads.AdError;
-import com.facebook.ads.AudienceNetworkAds;
-import com.facebook.ads.InterstitialAd;
-import com.facebook.ads.InterstitialAdListener;
+import com.google.android.gms.ads.MobileAds;
+import com.google.android.gms.ads.initialization.InitializationStatus;
+import com.google.android.gms.ads.initialization.OnInitializationCompleteListener;
+import com.google.android.gms.ads.interstitial.InterstitialAd;
 import com.softekapp.whatstool.Adapters.ListAdapter;
 import com.softekapp.whatstool.Applications.Whatyclean;
 import com.softekapp.whatstool.Models.StorageSize;
@@ -81,10 +80,6 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onDestroy() {
-
-        if (interstitialAd != null) {
-            interstitialAd.destroy();
-        }
         super.onDestroy();
     }
 
@@ -103,79 +98,6 @@ public class MainActivity extends AppCompatActivity {
             int uiOptions = View.SYSTEM_UI_FLAG_FULLSCREEN;
             decorView.setSystemUiVisibility(uiOptions);
         }
-
-
-        // Initialize the Audience Network SDK
-        AudienceNetworkAds.initialize(this);
-
-        // Instantiate an InterstitialAd object.
-        // NOTE: the placement ID will eventually identify this as your App, you can ignore it for
-        // now, while you are testing and replace it later when you have signed up.
-        // While you are using this temporary code you will only get test ads and if you release
-        // your code like this to the Google Play your users will not receive ads (you will get a no fill error).
-        interstitialAd = new InterstitialAd(this, getString(R.string.INTERSTITIAL_ID));
-
-        // Set listeners for the Interstitial Ad
-        interstitialAd.setAdListener(new InterstitialAdListener() {
-            @Override
-            public void onInterstitialDisplayed(Ad ad) {
-                // Interstitial ad displayed callback
-                Log.e(TAG, "Interstitial ad displayed.");
-            }
-
-            @Override
-            public void onInterstitialDismissed(Ad ad) {
-                if(intAdShown){
-                    intAdShown = false;
-                    try {
-                        Whatyclean.imagesFilesReceived = imagesFilesReceived;
-                        Whatyclean.imagesFilesSent = imagesFilesSent;
-                        Whatyclean.videoFilesReceived = videoFilesReceived;
-                        Whatyclean.videoFilesSent = videoFilesSent;
-                        Whatyclean.audioFilesReceived = audioFilesReceived;
-                        Whatyclean.audioFilesSent = audioFilesSent;
-                        Whatyclean.voiceFiles = voiceFiles;
-                        Intent intent = new Intent(MainActivity.this, Navigation_Activity.class);
-                        startActivity(intent);
-                        finish();
-                    }catch (Exception e){
-                        Toast.makeText(MainActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
-                    }
-                }
-                // Interstitial dismissed callback
-                Log.e(TAG, "Interstitial ad dismissed.");
-            }
-
-            @Override
-            public void onError(Ad ad, AdError adError) {
-                // Ad error callback
-                Log.e(TAG, "Interstitial ad failed to load: " + adError.getErrorMessage());
-//                interstitialAd.loadAd();
-            }
-
-            @Override
-            public void onAdLoaded(Ad ad) {
-                // Interstitial ad is loaded and ready to be displayed
-                Log.d(TAG, "Interstitial ad is loaded and ready to be displayed!");
-            }
-
-            @Override
-            public void onAdClicked(Ad ad) {
-                // Ad clicked callback
-                Log.d(TAG, "Interstitial ad clicked!");
-            }
-
-            @Override
-            public void onLoggingImpression(Ad ad) {
-                // Ad impression logged callback
-                Log.d(TAG, "Interstitial ad impression logged!");
-            }
-        });
-
-
-        // For auto play video ads, it's recommended to load the ad
-        // at least 30 seconds before it is shown
-        interstitialAd.loadAd();
 
 
         Mint.initAndStartSession(MainActivity.this, "7b5724a6");
@@ -212,11 +134,7 @@ public class MainActivity extends AppCompatActivity {
         nextButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(interstitialAd.isAdLoaded()){
-                    interstitialAd.show();
-                    intAdShown = true;
-                }else{
-                    intAdShown = false;
+
                     try {
                         Whatyclean.imagesFilesReceived = imagesFilesReceived;
                         Whatyclean.imagesFilesSent = imagesFilesSent;
@@ -231,7 +149,7 @@ public class MainActivity extends AppCompatActivity {
                     }catch (Exception e){
                         Toast.makeText(MainActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
                     }
-                }
+
             }
         });
 

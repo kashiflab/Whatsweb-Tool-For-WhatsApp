@@ -14,12 +14,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.FragmentTransaction;
 
-import com.facebook.ads.Ad;
-import com.facebook.ads.AdError;
-import com.facebook.ads.AdListener;
-import com.facebook.ads.AdSize;
-import com.facebook.ads.AdView;
-import com.facebook.ads.AudienceNetworkAds;
 import com.softekapp.whatstool.Applications.Whatyclean;
 import com.softekapp.whatstool.Fragments.AudioFiles_Fragment;
 import com.softekapp.whatstool.Fragments.ImageFiles_Fragment;
@@ -57,7 +51,6 @@ public class Navigation_Activity extends AppCompatActivity {
     public static ArrayList<Sorted_Media_Files> sortedAudioMediaFiles = new ArrayList<>();
     public static ArrayList<Sorted_Media_Files> sortedVoiceMediaFiles = new ArrayList<>();
 
-    private AdView adView;
 
     //views
     private BottomNavigationBar bottomNavigationBar;
@@ -67,9 +60,6 @@ public class Navigation_Activity extends AppCompatActivity {
     @Override
     protected void onDestroy() {
 
-        if (adView != null) {
-            adView.destroy();
-        }
         super.onDestroy();
     }
 
@@ -80,44 +70,6 @@ public class Navigation_Activity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
-        // Initialize the Audience Network SDK
-        AudienceNetworkAds.initialize(this);
-
-
-        adView = new AdView(this, getString(R.string.BANNER_ID), AdSize.BANNER_HEIGHT_50);
-
-        // Find the Ad Container
-        LinearLayout adContainer = (LinearLayout) findViewById(R.id.banner_container);
-
-        // Add the ad view to your activity layout
-        adContainer.addView(adView);
-
-        // Request an ad
-        adView.loadAd();
-
-        adView.setAdListener(new AdListener() {
-            @Override
-            public void onError(Ad ad, AdError adError) {
-                Log.i("Error",adError.getErrorMessage());
-                ad.loadAd();
-            }
-
-            @Override
-            public void onAdLoaded(Ad ad) {
-                Log.i("Loaded","Loaded");
-            }
-
-            @Override
-            public void onAdClicked(Ad ad) {
-                Log.i("Clicked","Clicked");
-            }
-
-            @Override
-            public void onLoggingImpression(Ad ad) {
-                Log.i("Logging","Logging");
-            }
-        });
 
 
         Bundle bundle = getIntent().getExtras();

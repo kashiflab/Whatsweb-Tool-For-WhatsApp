@@ -18,7 +18,7 @@
     <string name="navigation_drawer_close">Close Navigation Drawer</string>
     <string name="status_image">Status Image</string>
 <!--  IMG_16_9_APP_INSTALL#YOUR_PLACEMENT_ID  -->
-    <string name="BANNER_ID">2803331693101162_2803337766433888</string>
+    <string name="BANNER_ID">ca-app-pub-3940256099942544/6300978111</string>
 <!--  IMG_16_9_APP_INSTALL#YOUR_PLACEMENT_ID  -->
-    <string name="INTERSTITIAL_ID">2803331693101162_2803336286434036</string>
+    <string name="INTERSTITIAL_ID">ca-app-pub-3940256099942544/1033173712</string>
 </resources>
